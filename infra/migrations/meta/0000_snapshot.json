@@ -1,5 +1,5 @@
 {
-  "id": "6d73eba8-3d05-4b2d-afd5-240c2f10486f",
+  "id": "1fc2ec65-df4f-421d-b83b-86aeca434e4a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -41,7 +41,7 @@
         },
         "password": {
           "name": "password",
-          "type": "varchar(72)",
+          "type": "varchar(60)",
           "primaryKey": false,
           "notNull": true
         },
@@ -49,14 +49,14 @@
           "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "default": "now()"
         },
         "updated_at": {
           "name": "updated_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "default": "now()"
         }
       },

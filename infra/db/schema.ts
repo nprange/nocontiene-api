@@ -12,13 +12,14 @@ export const users = pgTable('users', {
   // Why 254 in length? https://stackoverflow.com/a/1199238
   email: varchar({ length: 254 }).notNull().unique(),
 
-  // Why 72 in length? https://security.stackexchange.com/a/39851
-  password: varchar({ length: 72 }).notNull(),
+  // Why 60 in length? https://www.npmjs.com/package/bcrypt#hash-info
+  password: varchar({ length: 60 }).notNull(),
 
   // Why timestamp with time zone? https://justatheory.com/2012/04/postgres-use-timestamptz/
   created_at: timestamp('created_at', { withTimezone: true })
     .notNull()
     .defaultNow(),
+
   updated_at: timestamp('updated_at', { withTimezone: true })
     .notNull()
     .defaultNow(),

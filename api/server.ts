@@ -68,7 +68,7 @@ app.setNotFoundHandler((request, response) => {
   if (pathname && routeRegistry.has(pathname)) {
     publicErrorObject = new MethodNotAllowedError();
   } else {
-    publicErrorObject = new NotFoundError();
+    publicErrorObject = new NotFoundError({});
   }
 
   response.status(publicErrorObject.statusCode).send(publicErrorObject);

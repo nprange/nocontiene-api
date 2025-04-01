@@ -4,9 +4,9 @@ CREATE TABLE "users" (
 	"last_name" varchar(75) NOT NULL,
 	"username" varchar(30) NOT NULL,
 	"email" varchar(254) NOT NULL,
-	"password" varchar(72) NOT NULL,
-	"created_at" timestamp with time zone DEFAULT now(),
-	"updated_at" timestamp with time zone DEFAULT now(),
+	"password" varchar(60) NOT NULL,
+	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"updated_at" timestamp with time zone DEFAULT now() NOT NULL,
 	CONSTRAINT "users_username_unique" UNIQUE("username"),
 	CONSTRAINT "users_email_unique" UNIQUE("email")
 );

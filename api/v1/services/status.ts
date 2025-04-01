@@ -3,7 +3,7 @@ import { sql } from 'drizzle-orm';
 import { env } from 'infra/env';
 import { type Status, statusSchema } from '../schemas/statusSchema';
 
-export async function getHandler(): Promise<Status> {
+export async function getApplicationStatus(): Promise<Status> {
   const updatedAt = new Date().toISOString();
 
   const databaseVersionResult = await query(sql`SHOW server_version;`);

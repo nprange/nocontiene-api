@@ -14,6 +14,7 @@ import {
   MethodNotAllowedError,
   NotFoundError,
   ServiceError,
+  ValidationError,
 } from 'infra/errors';
 
 const routeRegistry = new Map<string, Set<string>>();
@@ -44,7 +45,8 @@ app.setErrorHandler((error, request, response) => {
   if (
     error instanceof MethodNotAllowedError ||
     error instanceof NotFoundError ||
-    error instanceof ServiceError
+    error instanceof ServiceError ||
+    error instanceof ValidationError
   ) {
     return response.status(error.statusCode).send(error.toJSON());
   }

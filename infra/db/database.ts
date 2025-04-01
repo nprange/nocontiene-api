@@ -29,6 +29,10 @@ export async function query(sqlStatement: SQL) {
   }
 }
 
+export async function closeDatabasePool() {
+  await pool.end();
+}
+
 function getSSLValues() {
   if (env.POSTGRES_CA) {
     return {

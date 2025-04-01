@@ -4,7 +4,7 @@
   "main": "index.ts",
   "scripts": {
     "dev": "npm run services:up && npm run services:wait:database && npm run migrations:up && tsx watch api/server.ts",
-    "test": "npm run services:up && npm run services:wait:database && npm run migrations:up && concurrently -n node,jest --hide node -k -s command-jest \"tsx watch api/server.ts\" \"jest --runInBand --verbose\"",
+    "test": "npm run services:up && concurrently -n node,jest --hide node -k -s command-jest \"tsx watch api/server.ts\" \"jest --runInBand --verbose\"",
     "posttest": "npm run services:stop",
     "test:watch": "jest --watchAll --runInBand --verbose",
     "services:up": "docker compose -f infra/compose.yaml up -d",
@@ -39,7 +39,8 @@
     "ts-jest": "29.2.6",
     "ts-node": "10.9.2",
     "tsx": "4.19.3",
-    "typescript": "5.7.3"
+    "typescript": "5.7.3",
+    "uuid": "11.1.0"
   },
   "dependencies": {
     "@fastify/cors": "10.1.0",

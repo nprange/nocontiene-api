@@ -86,14 +86,52 @@ export class MethodNotAllowedError extends Error {
   }
 }
 
+interface ValidationErrorOptions {
+  cause?: unknown;
+  message?: string;
+  action?: string;
+}
+
+export class ValidationError extends Error {
+  public action: string;
+  public statusCode: number;
+
+  constructor({ cause, message, action }: ValidationErrorOptions) {
+    super(message || 'A validation error happened.', { cause });
+    this.name = 'ValidationError';
+    this.action = action || 'Adjust the submitted data and try again.';
+    this.statusCode = 400;
+  }
+
+  toJSON(): {
+    name: string;
+    message: string;
+    action: string;
+    status_code: number;
+  } {
+    return {
+      name: this.name,
+      message: this.message,
+      action: this.action,
+      status_code: this.statusCode,
+    };
+  }
+}
+
+interface NotFoundErrorOptions {
+  cause?: unknown;
+  message?: string;
+  action?: string;
+}
+
 export class NotFoundError extends Error {
   public action: string;
   public statusCode: number;
 
-  constructor() {
-    super('Resource not found.');
+  constructor({ cause, message, action }: NotFoundErrorOptions) {
+    super(message || 'Resource not found', { cause });
     this.name = 'NotFoundError';
-    this.action = 'Verify if the endpoint path is valid.';
+    this.action = action || 'Verify if the submitted parameters are correct.';
     this.statusCode = 404;
   }
 

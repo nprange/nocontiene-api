@@ -1,17 +1,26 @@
-import { pgTable, text, varchar, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { pgTable, varchar, timestamp, uuid } from 'drizzle-orm/pg-core';
 
-export const user = pgTable('users', {
+export const users = pgTable('users', {
   id: uuid().primaryKey().defaultRandom(),
+
+  first_name: varchar({ length: 50 }).notNull(),
+  last_name: varchar({ length: 75 }).notNull(),
+
+  // For reference, GitHub limits usernames to 39 characters.
+  username: varchar({ length: 30 }).notNull().unique(),
 
   // Why 254 in length? https://stackoverflow.com/a/1199238
   email: varchar({ length: 254 }).notNull().unique(),
 
-  // Why 72 in length? https://security.stackexchange.com/a/39851
-  password: varchar({ length: 72 }).notNull(),
+  // Why 60 in length? https://www.npmjs.com/package/bcrypt#hash-info
+  password: varchar({ length: 60 }).notNull(),
 
   // Why timestamp with time zone? https://justatheory.com/2012/04/postgres-use-timestamptz/
-  createdAt: timestamp('created_at', { withTimezone: true })
+  created_at: timestamp('created_at', { withTimezone: true })
     .notNull()
     .defaultNow(),
-  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow(),
+
+  updated_at: timestamp('updated_at', { withTimezone: true })
+    .notNull()
+    .defaultNow(),
 });

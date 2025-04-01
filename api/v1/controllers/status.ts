@@ -1,5 +1,5 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod';
-import { getHandler } from '../services/status';
+import { getApplicationStatus } from '../services/status';
 import { statusSchema } from '../schemas/statusSchema';
 
 export const status: FastifyPluginAsyncZod = async app => {
@@ -15,7 +15,7 @@ export const status: FastifyPluginAsyncZod = async app => {
       },
     },
     async (request, response) => {
-      const applicationStatus = await getHandler();
+      const applicationStatus = await getApplicationStatus();
 
       return response.status(200).send(applicationStatus);
     }
